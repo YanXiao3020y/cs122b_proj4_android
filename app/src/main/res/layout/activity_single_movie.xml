@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:background="@android:color/darker_gray"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/darker_gray"
+              android:orientation="vertical">
+    <Button
+            android:id="@+id/back_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_gravity="start"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:text="Back"
+            app:layout_constraintVertical_bias="0.2"
+
+    />
 
     <TextView
-            android:id="@+id/title"
+            android:id="@+id/title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -21,7 +36,7 @@
             android:orientation="horizontal"
     >
         <TextView
-                android:id="@+id/year"
+                android:id="@+id/year1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
@@ -31,7 +46,7 @@
         />
 
         <TextView
-                android:id="@+id/rating"
+                android:id="@+id/rating1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
@@ -42,7 +57,7 @@
     </LinearLayout>
 
     <TextView
-            android:id="@+id/director"
+            android:id="@+id/director1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
@@ -51,16 +66,16 @@
     />
 
     <TextView
-        android:id="@+id/genres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        android:hint="genres"
+            android:id="@+id/genres1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:hint="genres"
     />
 
     <TextView
-            android:id="@+id/stars"
+            android:id="@+id/stars1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"

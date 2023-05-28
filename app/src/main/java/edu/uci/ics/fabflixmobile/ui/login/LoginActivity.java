@@ -14,6 +14,12 @@ import com.android.volley.toolbox.StringRequest;
 import edu.uci.ics.fabflixmobile.data.NetworkManager;
 import edu.uci.ics.fabflixmobile.databinding.ActivityLoginBinding;
 import edu.uci.ics.fabflixmobile.ui.movielist.MovieListActivity;
+import edu.uci.ics.fabflixmobile.ui.searchbar.SearchActivity;
+import org.json.JSONException;
+import org.json.JSONObject;
+//import com.google.gson.JsonObject;
+
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,10 +33,16 @@ public class LoginActivity extends AppCompatActivity {
       In Android, localhost is the address of the device or the emulator.
       To connect to your machine, you need to use the below IP address
      */
-    private final String host = "10.0.2.2";
-    private final String port = "8080";
-    private final String domain = "cs122b_project2_login_cart_example_war";
-    private final String baseURL = "http://" + host + ":" + port + "/" + domain;
+    //??? connect AWS, so need to replace following 4 lines info
+//    private final String host = "10.0.2.2";
+//    private final String port = "8080";
+//    private final String domain = "cs122b_project1_api_example_war";
+//    private final String baseURL = "http://" + host + ":" + port + "/" + domain;
+
+    private final String host = "ec2-18-221-109-181.us-east-2.compute.amazonaws.com";
+    private final String port = "8443";
+    private final String domain = "cs122b-project1-api-example";
+    private final String baseURL = "https://" + host + ":" + port + "/" + domain;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,13 +73,30 @@ public class LoginActivity extends AppCompatActivity {
                 response -> {
                     // TODO: should parse the json response to redirect to appropriate functions
                     //  upon different response value.
-                    Log.d("login.success", response);
-                    //Complete and destroy login activity once successful
-                    finish();
-                    // initialize the activity(page)/destination
-                    Intent MovieListPage = new Intent(LoginActivity.this, MovieListActivity.class);
-                    // activate the list page.
-                    startActivity(MovieListPage);
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        if(jsonObject.getString("status").equals("success"))
+                        {
+                            Log.d("login.success", response);
+                            //Complete and destroy login activity once successful
+                            finish();
+                            // initialize the activity(page)/destination
+                            Intent MovieListPage = new Intent(LoginActivity.this, SearchActivity.class);
+                            // activate the list page.
+                            startActivity(MovieListPage);
+                        }
+                        else
+                        {
+                            message.setText(jsonObject.getString("message"));
+                            Log.d("login.fail", "show error message: " + jsonObject.getString("message"));
+                        }
+
+                    } catch (JSONException e) {
+                        System.out.println(e.toString());
+                    }
+
+
                 },
                 error -> {
                     // error
@@ -79,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                 final Map<String, String> params = new HashMap<>();
                 params.put("username", username.getText().toString());
                 params.put("password", password.getText().toString());
+                params.put("recap", "yes");
                 return params;
             }
         };
